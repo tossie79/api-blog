@@ -8,12 +8,12 @@ use Faker\Factory;
 use Laravel\Lumen\Testing\DatabaseTransactions;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use Illuminate\Support\Facades\Artisan;
+
 class PostTest extends TestCase
 {
  
   use DatabaseTransactions;
   
-
   public function setUp()
   {
       parent::setUp();

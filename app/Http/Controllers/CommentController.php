@@ -27,7 +27,6 @@ class CommentController extends Controller
     *  @return \Illuminate\Http\Response
     *
     */
-
     public function index():Response
     {
     	$comments = $this->comment->getAllComments();

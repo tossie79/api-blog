@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class Handler extends ExceptionHandler
 {
@@ -22,7 +23,8 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
-        MethodNotAllowedHttpException::class
+        MethodNotAllowedHttpException::class,
+        NotFoundHttpException::class,
     ];
 
     /**
@@ -58,6 +60,12 @@ class Handler extends ExceptionHandler
         {
             return response()->json([
                 'message' => 'Error: That Route Doesnt Exist, Please Check And Try Again'
+            ], 404);
+        }
+        if ($e instanceof NotFoundHttpException) 
+        {
+            return response()->json([
+                'message' => 'Error: Sorry, the page you are looking for could not be found.'
             ], 404);
         }
         return parent::render($request, $e);

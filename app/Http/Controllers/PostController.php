@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
 class PostController extends Controller
@@ -28,7 +29,7 @@ class PostController extends Controller
     *
     */
 
-    public function index():Response
+    public function index()
     {
     	$posts = $this->post->getAllPosts();
     	$posts=empty($posts)?["There are currently no Posts on our Blog. Please Check Later"]:$posts;
@@ -38,12 +39,12 @@ class PostController extends Controller
     /** 
     * Display Post with ID with related user and the associated comments 
     *
-    * @var int
+    * @param int
     * @return \Illuminate\Http\Response
     *
     */
 
-    public function show($id):Response
+    public function show($id)
     {
     	$post=$this->post->getPost($id);
     	$post=empty($post)?["There is no Post with ID({$id}) on our Blog. Please check the ID and try again"]:$post;

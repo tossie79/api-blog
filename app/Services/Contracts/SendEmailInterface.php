@@ -2,12 +2,12 @@
 declare(strict_types=1);
 namespace App\Services\Contracts;
 
+interface SendEmailInterface {
+
 /** 
  * Send Email Interface functionality 
  *
- *
  */
-interface SendEmailInterface {
 
-	public function sendMail(array $userDetails);
+    public function sendMail(array $userDetails);
 }

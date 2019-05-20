@@ -44,7 +44,7 @@ class UserController extends Controller
     * @param int
     *  @return \Illuminate\Http\Response
     */
-    public function destroy($id):Response
+    public function destroy($id)
     {
     	$userDetails = $this->user->deleteUser($id);
     	if(!empty($userDetails)){
