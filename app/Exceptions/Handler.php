@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Laravel\Lumen\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
@@ -21,6 +22,7 @@ class Handler extends ExceptionHandler
         HttpException::class,
         ModelNotFoundException::class,
         ValidationException::class,
+        MethodNotAllowedHttpException::class
     ];
 
     /**
@@ -45,30 +47,17 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
-        if ($e instanceof ValidationException) 
-        {
-           return response()->json([
-                'message' => 'Validation Error Has Occured'
-            ], 404);
-        }
-
-        if ($e instanceof HttpException) 
-        {
-            return response()->json([
-                'message' => 'An Error Has Occured: The Content You Are Looking For Could Not Be Found ',
-            ], 404);
-        }
-
-        if ($e instanceof AuthorizationException) 
-        {
-            return response()->json([
-                'message' => 'Authorization Error Has Occured'
-            ], 404);
-        }
-        if ($exception instanceof ModelNotFoundException) 
+       
+        if ($e instanceof ModelNotFoundException) 
         {
             return response()->json([
                 'message' => 'Resource not found Error'
+            ], 404);
+        }
+        if ($e instanceof MethodNotAllowedHttpException) 
+        {
+            return response()->json([
+                'message' => 'Error: That Route Doesnt Exist, Please Check And Try Again'
             ], 404);
         }
         return parent::render($request, $e);

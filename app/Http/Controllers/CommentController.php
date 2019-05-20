@@ -11,7 +11,7 @@ class CommentController extends Controller
 	private $comment;
 	
 	/** 
-    * PostController constructor
+    * CommentController constructor
     * @param \App\Comment
     * @return void
     */
@@ -28,7 +28,7 @@ class CommentController extends Controller
     *
     */
 
-    public function index()
+    public function index():Response
     {
     	$comments = $this->comment->getAllComments();
     	$comments=empty($comments)?["There are currently no Comments on our Blog. Please Check Later"]:$comments;

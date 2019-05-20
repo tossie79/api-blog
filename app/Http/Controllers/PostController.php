@@ -28,7 +28,7 @@ class PostController extends Controller
     *
     */
 
-    public function index()
+    public function index():Response
     {
     	$posts = $this->post->getAllPosts();
     	$posts=empty($posts)?["There are currently no Posts on our Blog. Please Check Later"]:$posts;
@@ -43,7 +43,7 @@ class PostController extends Controller
     *
     */
 
-    public function show($id)
+    public function show($id):Response
     {
     	$post=$this->post->getPost($id);
     	$post=empty($post)?["There is no Post with ID({$id}) on our Blog. Please check the ID and try again"]:$post;

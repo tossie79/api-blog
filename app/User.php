@@ -50,9 +50,19 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     {
         return $this->hasMany(Comment::class);
     }
-    
+
+    /**
+    * Get all Users
+    * @return array
+    */
+    public function getAllUsers()
+    {
+        return $this->get();
+    }
+
+       
     /** 
-    * Delete User with Id and related Tables and return array of username and email
+    * Delete User with Id and delete the related rows(posts and comments). Return array of username and email
     *
     * @param int
     * @return array
